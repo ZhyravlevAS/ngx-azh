@@ -1,0 +1,153 @@
+$danger: rgba(255, 35, 37, 0.8) !default;
+$info: rgba(0, 161, 255, 0.8) !default;
+$warning: rgba(255, 170, 0, 0.8) !default;
+$textColor: rgba(255, 255, 255, 1) !default;
+
+ngx-azh-notify-element {
+  display: block;
+  padding: 0 15px 15px 0;
+  opacity: 0;
+  transition: opacity .3s ease, transform .3s ease;
+
+  &.ngx-azh-notify--in {
+    opacity: 1;
+  }
+
+  &.ngx-azh-notify--danger .ngx-azh-notify {
+    background: $danger;
+
+    .ngx-azh-notify__button {
+      background-color: darken($danger, 20%);
+
+      &:hover {
+        background-color: darken($danger, 25%);
+      }
+    }
+  }
+
+  &.ngx-azh-notify--info .ngx-azh-notify {
+    background: $info;
+
+    .ngx-azh-notify__button {
+      background-color: darken($info, 20%);
+
+      &:hover {
+        background-color: darken($info, 25%);
+      }
+    }
+  }
+
+  &.ngx-azh-notify--warning .ngx-azh-notify {
+    background: $warning;
+
+    .ngx-azh-notify__button {
+      background-color: darken($warning, 20%);
+
+      &:hover {
+        background-color: darken($warning, 25%);
+      }
+    }
+  }
+}
+
+ngx-azh-notify-placement {
+  position: fixed;
+  z-index: 10001;
+  display: block;
+
+  &.ngx-azh-notify--top-left {
+    top: 30px;
+    left: 0;
+
+    ngx-azh-notify-element {
+      transform: translateX(0);
+
+      &.ngx-azh-notify--in {
+        transform: translateX(15px);
+      }
+    }
+  }
+
+  &.ngx-azh-notify--top-right {
+    top: 30px;
+    right: 0;
+
+    ngx-azh-notify-element {
+      transform: translateX(15px);
+
+      &.ngx-azh-notify--in {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &.ngx-azh-notify--bottom-left {
+    bottom: 15px;
+    left: 0;
+
+    ngx-azh-notify-element {
+      transform: translateX(0);
+
+      &.ngx-azh-notify--in {
+        transform: translateX(15px);
+      }
+    }
+  }
+
+  &.ngx-azh-notify--bottom-right {
+    bottom: 15px;
+    right: 0;
+
+    ngx-azh-notify-element {
+      transform: translateX(15px);
+
+      &.ngx-azh-notify--in {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+.ngx-azh-notify {
+  display: block;
+  word-wrap: break-word;
+  color: $textColor;
+  padding: 10px 30px 10px 10px;
+  border-radius: 6px;
+  width: 260px;
+  position: relative;
+}
+
+.ngx-azh-notify__close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 12px;
+  height: 12px;
+  line-height: 1;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6IiBmaWxsPSIjZmZmIi8+PC9zdmc+");
+  background-size: 12px;
+  opacity: .8;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.ngx-azh-notify__header {
+  font-weight: bold;
+}
+
+.ngx-azh-notify__content {
+  padding: 5px 0 0;
+}
+
+.ngx-azh-notify__button {
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px;
+  margin-top: 10px;
+  transition: background-color .3s ease;
+}

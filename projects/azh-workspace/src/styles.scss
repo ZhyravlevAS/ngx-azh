@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'dist/ngx-azh-notify/src/lib/ngx-azh-notify.scss';
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+
+ul {
+  padding-left: 0;
+  list-style: none
+}
+
+ul ul {
+  padding-left: 15px;
+}
