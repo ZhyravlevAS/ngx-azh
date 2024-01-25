@@ -1,56 +1,39 @@
 <div class="col-lg-8 mx-auto p-3 py-md-5">
-  <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
-    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-      <span class="fs-4">Starter template</span>
-    </a>
-  </header>
+    <main>
+        <h1>Modal for Angular</h1>
+        <p class="fs-5 col-md-8">A simple solution for displaying modal windows in Angular.</p>
 
-  <main>
-    <h1>Notification for Angular</h1>
-    <p class="fs-5 col-md-8">The simplest solution for notification in Angular.</p>
+        <div class="mb-5">
+            <a (click)="openModal()" class="btn btn-primary px-4">Open modal</a>
+        </div>
 
-    <div class="mb-5">
-      <a (click)="createDanger()" class="btn btn-primary btn-lg px-4">Demo</a>
-    </div>
+        <p>Quick start:</p>
 
-    <hr class="col-3 col-md-2 mb-5">
+        <pre>npm install ngx-azh-modal --save</pre>
 
-    <h2>Content</h2>
-    <ul>
-      <li><a href="/docs/5.2/getting-started/introduction/">Quick start</a></li>
-      <li><a href="/docs/5.2/getting-started/webpack/">Angular version</a></li>
-      <li><a href="/docs/5.2/getting-started/parcel/">Simple example</a></li>
-      <li><a href="/docs/5.2/getting-started/contribute/">Configuration example</a></li>
-      <li><a href="/docs/5.2/getting-started/contribute/">API</a>
-        <ul>
-          <li><a href="/docs/5.2/getting-started/introduction/">Inject tag</a></li>
-          <li><a href="/docs/5.2/getting-started/webpack/">Method: create</a></li>
-          <li><a href="/docs/5.2/getting-started/parcel/">Method: close</a></li>
-          <li><a href="/docs/5.2/getting-started/contribute/">Method: clear</a></li>
-          <li><a href="/docs/5.2/getting-started/contribute/">Class: NgxAzhConfig</a></li>
-          <li><a href="/docs/5.2/getting-started/contribute/">Interface: NgxAzhNotifyProperties</a></li>
-          <li><a href="/docs/5.2/getting-started/contribute/">Interface: NgxAzhNotifyPropertiesButton</a></li>
-          <li><a href="/docs/5.2/getting-started/contribute/">Enum: NgxAzhNotifyPosition</a></li>
-          <li><a href="/docs/5.2/getting-started/contribute/">Enum: NgxAzhNotifyType</a></li>
-        </ul>
-      </li>
-      <li><a href="/docs/5.2/getting-started/contribute/">Styling</a></li>
-      <li><a href="/docs/5.2/getting-started/contribute/">License</a></li>
-    </ul>
+        <p>Doc:</p>
+        <a href="https://www.npmjs.com/package/ngx-azh-modal" target="_blank">https://www.npmjs.com/package/ngx-azh-modal</a>
 
-    <hr class="col-3 col-md-2 my-5">
+        <hr class="col-3 col-md-2 my-5">
 
-    <h2>Quick start</h2>
+        <h1>Notification for Angular</h1>
+        <p class="fs-5 col-md-8">A simple solution for displaying notifications in Angular.</p>
 
-    <pre>
-      npm install ngx-azh-notify --save
-    </pre>
+        <div class="mb-5">
+            <a (click)="createDanger()" class="btn btn-danger px-4 me-2">Danger</a>
+            <a (click)="createWarning()" class="btn btn-warning px-4 me-2">Warning</a>
+            <a (click)="createInfo()" class="btn btn-primary px-4">Info</a>
+        </div>
 
+        <p>Quick start:</p>
 
-  </main>
-  <footer class="pt-5 my-5 text-muted border-top">
-    Created by the Bootstrap team &middot; &copy; 2022
-  </footer>
+        <pre>npm install ngx-azh-notify --save</pre>
+
+        <p>Doc:</p>
+        <a href="https://www.npmjs.com/package/ngx-azh-notify" target="_blank">https://www.npmjs.com/package/ngx-azh-notify</a>
+
+    </main>
 </div>
 
 <ngx-azh-notify-placement></ngx-azh-notify-placement>
+<ngx-azh-modal-placement></ngx-azh-modal-placement>

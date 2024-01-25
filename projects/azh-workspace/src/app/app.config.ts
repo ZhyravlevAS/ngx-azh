@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NgxAzhConfig, NgxAzhNotifyPosition } from 'ngx-azh-notify';
+import { NgxAzhConfig } from 'projects/ngx-azh-notify/src/lib/ngx-azh-config';
+import { NgxAzhNotifyPosition } from 'projects/ngx-azh-notify/src/lib/ngx-azh-notify-position';
 
 @Injectable()
 export class AppConfig extends NgxAzhConfig {

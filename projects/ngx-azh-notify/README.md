@@ -1,10 +1,6 @@
 # Notification for Angular
 
-The simplest solution for notification in Angular.
-
-## Demo
-
-Check out the live demo here: TODO link
+A simple solution for displaying notifications in Angular.
 
 ## Quick start
 
@@ -14,7 +10,7 @@ npm install ngx-azh-notify --save
 
 ### Angular version
 
-This library is built to work with **Angular 13+**.
+This library is built to work with **Angular ^17.1.0**.
 
 ## Simple example
 
@@ -212,7 +208,7 @@ The settings are hierarchical: Default (library) -> Global configuration setting
 
 ## Styling
 
-Import `ngx-azh-notify.scss` from the library into your root stylesheet.
+Import `./node_modules/ngx-azh-notify/src/lib/ngx-azh-notify.scss` from the library into your root stylesheet.
 
 ## License
 

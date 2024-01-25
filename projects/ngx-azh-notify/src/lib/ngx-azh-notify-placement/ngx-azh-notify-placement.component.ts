@@ -17,6 +17,7 @@ import { NgxAzhNotifyService } from '../ngx-azh-notify.service';
   selector: 'ngx-azh-notify-placement',
   template: `
     <ng-template ngxAzhNotifyHost></ng-template>`,
+  styleUrl: `ngx-azh-notify-placement.component.scss`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })

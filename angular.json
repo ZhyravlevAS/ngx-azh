@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "azh-workspace:build:production"
+              "buildTarget": "azh-workspace:build:production"
             },
             "development": {
-              "browserTarget": "azh-workspace:build:development"
+              "buildTarget": "azh-workspace:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "azh-workspace:build"
+            "buildTarget": "azh-workspace:build"
           }
         },
         "test": {
@@ -133,6 +133,39 @@
             "main": "projects/ngx-azh-notify/src/test.ts",
             "tsConfig": "projects/ngx-azh-notify/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-azh-notify/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-azh-modal": {
+      "projectType": "library",
+      "root": "projects/ngx-azh-modal",
+      "sourceRoot": "projects/ngx-azh-modal/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-azh-modal/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-azh-modal/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-azh-modal/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-azh-modal/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }

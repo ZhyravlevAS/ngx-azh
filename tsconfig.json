@@ -12,6 +12,9 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "ngx-azh-modal": [
+        "dist/ngx-azh-modal"
+      ],
       "ngx-azh-notify": [
         "dist/ngx-azh-notify/ngx-azh-notify",
         "dist/ngx-azh-notify"

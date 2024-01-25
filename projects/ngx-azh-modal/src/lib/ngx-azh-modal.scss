@@ -1,0 +1,58 @@
+.azh-modal__placement {
+  display: none;
+  animation-name: azh-animation-window-open;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  background: rgb(0 0 0 / 50%);
+  overflow: auto;
+
+  .azh-modal__backdrop {
+    display: none;
+  }
+
+  .azh-modal__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    > * {
+      display: none;
+
+      &:last-child {
+        display: flex;
+      }
+    }
+  }
+}
+
+@keyframes azh-animation-window-open {
+  0% {
+    opacity: 0;
+    transform: scale3d(1.1, 1.1, 1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+body.azh-modal--open {
+  overflow: hidden !important;
+}
+
+body.azh-modal--open .azh-modal__placement {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  .azh-modal__wrapper {
+    z-index: 999;
+  }
+}
