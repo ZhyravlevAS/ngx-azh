@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgxAzhModalConfig, NgxAzhModalConfigToken } from './ngx-azh-modal-config';
 import { NgxAzhModalHostDirective } from './ngx-azh-modal-host.directive';
 import { NgxAzhModalPlacementComponent } from './ngx-azh-modal-placement.component';
 
@@ -7,5 +8,23 @@ import { NgxAzhModalPlacementComponent } from './ngx-azh-modal-placement.compone
   imports: [CommonModule],
   exports: [NgxAzhModalHostDirective, NgxAzhModalPlacementComponent],
   declarations: [NgxAzhModalHostDirective, NgxAzhModalPlacementComponent],
+  providers: [
+    {
+      provide: NgxAzhModalConfigToken,
+      useClass: NgxAzhModalConfig
+    }
+  ]
 })
-export class NgxAzhModalModule {}
+export class NgxAzhModalModule {
+  
+  /**
+   *
+   * @param parentModule
+   */
+  constructor(@Optional() @SkipSelf() parentModule?: NgxAzhModalModule) {
+    if (parentModule) {
+      throw new Error(
+          'NgxAzhModalModule is already loaded. Import it in the AppModule only');
+    }
+  }
+}

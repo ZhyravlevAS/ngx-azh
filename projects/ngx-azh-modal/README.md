@@ -18,16 +18,38 @@ This library is built to work with **Angular ^17.1.0**.
 // app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgxAzhModalModule } from 'ngx-azh-modal';
+import { NgxAzhModalModule, NgxAzhModalConfigToken } from 'ngx-azh-modal';
 import { AppComponent } from './app.component';
+import { AppModalConfig } from './app-modal-config';
 import { YourModalComponent } from './your-modal.component';
 
 @NgModule({
     imports: [BrowserModule, NgxAzhModalModule],
     declarations: [AppComponent, YourModalComponent],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [
+        {
+            // Global configuration for all modal windows of the application
+            provide: NgxAzhModalConfigToken,
+            useClass: AppModalConfig
+        }
+    ]
 })
 export class MyAppModule {
+}
+```
+
+```TypeScript
+// app-modal-config.ts
+import { Injectable } from '@angular/core';
+import { NgxAzhModalOptionsInterface, NgxAzhModalSizeEnum } from 'ngx-azh-modal';
+
+@Injectable()
+export class AppModalConfig implements NgxAzhModalOptionsInterface {
+    public size: NgxAzhModalSizeEnum = NgxAzhModalSizeEnum.LARGE;
+    public dontShowAgainId: string | undefined = undefined;
+    public notClosed: boolean = false;
+    public closeWhileNavigating: boolean = true;
 }
 ```
 
@@ -64,7 +86,7 @@ import { YourModalComponent } from './your-modal.component';
     selector: 'app-root',
     template: `
     <!-- IMPORTANT: place this tag in your bootstrap component! -->
-    <ngx-azh-modal-placement></ngx-azh-notify-placement>`
+    <ngx-azh-modal-placement></ngx-azh-modal-placement>`
 })
 export class AppComponent {
     
@@ -108,9 +130,10 @@ Important: `null` may be returned if the user previously selected “do not show
 
 ### Interface: NgxAzhModalOptionsInterface
 
-* **`size`** [`NgxAzhModalSizeEnum`] - Window dimensions.
-* **`dontShowAgainId`** [`string`] - Window ID if you want to use "don't show anymore".
-* **`notClosed`** [`boolean`] - True if the window cannot be closed by ESC or by clicking outside of it.
+* **`size`** [`NgxAzhModalSizeEnum`] - Window dimensions. `NgxAzhModalSizeEnum.SMALL` by default.
+* **`dontShowAgainId`** [`string`] - Window ID if you want to use "don't show anymore". `undefined` by default.
+* **`notClosed`** [`boolean`] - True if the window cannot be closed by ESC, navigation or by clicking outside of it. `false` by default.
+* **`closeWhileNavigating`** [`boolean`] - Close the window when you navigate the app from one route to another. `true` by default.
 
 ### Interface: NgxAzhModalResultInterface< ResultT >
 
@@ -128,6 +151,7 @@ Every modal window must implement this interface.
 
 * **`ESCAPE`** - closed by ESC
 * **`BACKDROP`** - closed by clicking outside
+* **`NAVIGATION`** - closed by navigation
 * **`CANCEL`** - closed by ModalResultSubject.cancel()
 * **`CONFIRM`** - closed by ModalResultSubject.confirm()
 

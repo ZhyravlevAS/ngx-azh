@@ -53,6 +53,11 @@ export interface NgxAzhModalOptionsInterface {
    * True if the window cannot be closed by ESC or by clicking outside of it.
    */
   notClosed?: boolean;
+
+  /**
+   * Close the window when you navigate the app from one route to another.
+   */
+  closeWhileNavigating?: boolean;
 }
 
 /**
@@ -61,6 +66,7 @@ export interface NgxAzhModalOptionsInterface {
 export enum NgxAzhModalReasonEnum {
   ESCAPE, // closed by ESC
   BACKDROP, // closed by clicking outside
+  NAVIGATION, // closed by navigation
   CANCEL, // closed by ModalResultSubject.cancel()
   CONFIRM, // closed by ModalResultSubject.confirm()
 }
