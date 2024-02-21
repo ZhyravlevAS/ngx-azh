@@ -1,20 +1,28 @@
-import { ComponentRef, ElementRef, Injectable, Injector, Renderer2, RendererFactory2, Type } from '@angular/core';
+import {
+  ComponentRef,
+  ElementRef,
+  Injectable,
+  Injector,
+  Renderer2,
+  RendererFactory2,
+  Type,
+  ViewContainerRef
+} from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { NgxAzhModalComponentInterface, NgxAzhModalOptionsInterface, NgxAzhModalSizeEnum } from './ngx-azh-modal';
 import { NgxAzhModalConfigToken } from './ngx-azh-modal-config';
-import { NgxAzhModalHostDirective } from './ngx-azh-modal-host.directive';
 
 @Injectable({
     providedIn: 'root',
 })
 export class NgxAzhModalService {
-    public static host: NgxAzhModalHostDirective;
-    public static backdrop: ElementRef;
-    
+    public static host: ViewContainerRef | undefined;
+    public static backdrop: ElementRef | undefined;
+
     private renderer: Renderer2;
-    
+
     constructor(
         private readonly rendererFactory: RendererFactory2,
         private readonly router: Router,
@@ -22,7 +30,7 @@ export class NgxAzhModalService {
     ) {
         this.renderer = this.rendererFactory.createRenderer(null, null);
     }
-    
+
     /**
      * Creates a modal window
      * @param component - Component reference. This should implement ModalComponentInterface
@@ -32,10 +40,17 @@ export class NgxAzhModalService {
         component: Type<T>,
         options?: NgxAzhModalOptionsInterface,
     ): ComponentRef<T> | null {
+        const host = NgxAzhModalService.host;
+        const backdrop = NgxAzhModalService.backdrop;
+
+        if (!host || !backdrop) {
+          console.warn(
+            `Host or backdrop is not initialized.`,
+          );
+          return null;
+        }
+
         options = {...this.injector.get(NgxAzhModalConfigToken), ...options};
-        
-        console.log('options --->', options);
-        
         // Exit if a "do not show again" id was passed, and it exists in localStorage.
         if (
             typeof options?.dontShowAgainId === 'string' &&
@@ -44,13 +59,13 @@ export class NgxAzhModalService {
         ) {
             return null;
         }
-        
+
         // Create component
-        let modal = NgxAzhModalService.host.viewContainerRef.createComponent<T>(component);
-        
+        let modal = host.createComponent<T>(component);
+
         // Add size
         let styledClass: string | null = null;
-        
+
         switch (options?.size) {
             case NgxAzhModalSizeEnum.MEDIUM:
                 styledClass = 'azh-modal--medium';
@@ -64,11 +79,11 @@ export class NgxAzhModalService {
             default:
                 styledClass = 'azh-modal--small';
         }
-        
+
         this.renderer.addClass(modal.location.nativeElement, styledClass);
-        
+
         const destroy$ = new Subject<void>();
-        
+
         // Close by escape
         fromEvent<KeyboardEvent>(document, 'keyup')
             .pipe(
@@ -78,21 +93,21 @@ export class NgxAzhModalService {
             .subscribe(() => {
                 modal.instance.result.escape();
             });
-        
+
         // Close by click backdrop
         let prevTarget: EventTarget | null;
-        
-        fromEvent<MouseEvent>(NgxAzhModalService.backdrop.nativeElement, 'mousedown')
+
+        fromEvent<MouseEvent>(backdrop.nativeElement, 'mousedown')
             .pipe(
                 tap(({target}) => (prevTarget = target)),
-                switchMap(() => fromEvent<MouseEvent>(NgxAzhModalService.backdrop.nativeElement, 'mouseup')),
-                filter(() => prevTarget === NgxAzhModalService.backdrop.nativeElement && !options?.notClosed),
+                switchMap(() => fromEvent<MouseEvent>(backdrop.nativeElement, 'mouseup')),
+                filter(() => prevTarget === backdrop.nativeElement && !options?.notClosed),
                 takeUntil(destroy$),
             )
             .subscribe(() => {
                 modal.instance.result.backdrop();
             });
-        
+
         // Close by navigation
         this.router.events
             .pipe(
@@ -102,46 +117,46 @@ export class NgxAzhModalService {
             .subscribe(() => {
                 modal.instance.result.backdrop();
             });
-        
+
         // Subscribe to result
         modal.instance.result.subscribe((event) => {
             const hasDontShowAgainId = typeof options?.dontShowAgainId === 'string' && options.dontShowAgainId.length > 0;
-            
+
             if (event?.dontShowAgain && !hasDontShowAgainId) {
                 console.warn(
                     `If you want to use "dontShowAgain" you need to pass the ID in the "dontShowAgainId" property when creating the window.`,
                 );
             }
-            
+
             if (event?.dontShowAgain && hasDontShowAgainId) {
                 window.localStorage.setItem(options?.dontShowAgainId as string, '1');
             }
-            
+
             modal.destroy();
         });
-        
+
         modal.onDestroy(() => {
             destroy$.next();
             destroy$.complete();
-            
-            if (!NgxAzhModalService.host.viewContainerRef.length) {
+
+            if (!host.length) {
                 this.renderer.removeClass(document.body, 'azh-modal--open');
             }
         });
-        
-        if (NgxAzhModalService.host.viewContainerRef.length) {
+
+        if (host.length) {
             this.renderer.addClass(document.body, 'azh-modal--open');
         }
-        
+
         modal.changeDetectorRef.markForCheck();
-        
+
         return modal;
     }
-    
+
     /**
      * Clear all modal windows.
      */
     public clear(): void {
-        NgxAzhModalService.host.viewContainerRef.clear();
+        NgxAzhModalService.host?.clear();
     }
 }

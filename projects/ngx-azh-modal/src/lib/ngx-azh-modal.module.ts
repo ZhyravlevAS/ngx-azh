@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { NgxAzhModalConfig, NgxAzhModalConfigToken } from './ngx-azh-modal-config';
-import { NgxAzhModalHostDirective } from './ngx-azh-modal-host.directive';
 import { NgxAzhModalPlacementComponent } from './ngx-azh-modal-placement.component';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [NgxAzhModalHostDirective, NgxAzhModalPlacementComponent],
-  declarations: [NgxAzhModalHostDirective, NgxAzhModalPlacementComponent],
+  exports: [NgxAzhModalPlacementComponent],
+  declarations: [NgxAzhModalPlacementComponent],
   providers: [
     {
       provide: NgxAzhModalConfigToken,
@@ -16,7 +15,7 @@ import { NgxAzhModalPlacementComponent } from './ngx-azh-modal-placement.compone
   ]
 })
 export class NgxAzhModalModule {
-  
+
   /**
    *
    * @param parentModule
