@@ -159,4 +159,11 @@ export class NgxAzhModalService {
     public clear(): void {
         NgxAzhModalService.host?.clear();
     }
+
+  /**
+   * Returns the number of open modals
+   */
+  public get size(): number {
+      return NgxAzhModalService.host?.length || 0;
+    }
 }

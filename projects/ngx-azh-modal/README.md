@@ -119,14 +119,19 @@ Inject the `<ngx-azh-modal-placement></ngx-azh-modal-placement>` tag into your a
 
 <!-- YOUR HTML -->
 ```
-### Method: create(component, options): ComponentRef <T> | null - Create modal
+
+### Methods and properties:
+
+`create(component, options): ComponentRef <T> | null` - Create modal.
 
 Important: `null` may be returned if the user previously selected “do not show again”.
 
 * **`component`** [`Type<T>`] - **required** Link to modal window.
 * **`options`** [`NgxAzhModalOptionsInterface`] Modal options.
 
-### Method: clear(): void - Clear all modal windows
+`clear(): void` - Clear all modal windows.
+
+`size: number` - Returns the number of open modals.
 
 ### Interface: NgxAzhModalOptionsInterface
 
@@ -149,15 +154,15 @@ Every modal window must implement this interface.
 
 ### Enum: NgxAzhModalReasonEnum
 
-* **`ESCAPE`** - closed by ESC
-* **`BACKDROP`** - closed by clicking outside
-* **`NAVIGATION`** - closed by navigation
-* **`CANCEL`** - closed by ModalResultSubject.cancel()
-* **`CONFIRM`** - closed by ModalResultSubject.confirm()
+* **`ESCAPE`** - closed by ESC;
+* **`BACKDROP`** - closed by clicking outside;
+* **`NAVIGATION`** - closed by navigation;
+* **`CANCEL`** - closed by ModalResultSubject.cancel();
+* **`CONFIRM`** - closed by ModalResultSubject.confirm();
 
 ### Enum: NgxAzhModalSizeEnum
 
-Applies the following CSS classes to a modal window component
+Applies the following CSS classes to a modal window component.
 
 * **`SMALL`** - `.azh-modal--small`
 * **`MEDIUM`** - `.azh-modal--medium`

@@ -32,8 +32,17 @@
         <p>Doc:</p>
         <a href="https://www.npmjs.com/package/ngx-azh-notify" target="_blank">https://www.npmjs.com/package/ngx-azh-notify</a>
 
+        <h1>Dropdown</h1>
+
+        <a
+          #anchorElement
+          (click)="openDropdown(anchorElement, $event)"
+          class="btn btn-primary px-4">
+          drop
+        </a>
     </main>
 </div>
 
 <ngx-azh-notify-placement></ngx-azh-notify-placement>
 <ngx-azh-modal-placement></ngx-azh-modal-placement>
+<ngx-azh-dropdown-placement></ngx-azh-dropdown-placement>

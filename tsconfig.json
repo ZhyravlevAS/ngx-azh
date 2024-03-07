@@ -12,6 +12,9 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
+      "ngx-azh-dropdown": [
+        "./dist/ngx-azh-dropdown"
+      ],
       "ngx-azh-modal": [
         "dist/ngx-azh-modal"
       ],

@@ -1,6 +1,6 @@
 {
   "name": "ngx-azh-modal",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^17.1.0",
     "@angular/core": "^17.1.0"
